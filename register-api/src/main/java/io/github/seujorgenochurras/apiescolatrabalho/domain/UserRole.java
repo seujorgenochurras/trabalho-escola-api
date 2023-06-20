@@ -1,5 +1,6 @@
 package io.github.seujorgenochurras.apiescolatrabalho.domain;
 
-public class Image {
-
+public enum UserRole {
+   STUDENT,
+   ADMIN
 }
