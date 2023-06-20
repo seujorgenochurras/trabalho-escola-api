@@ -1,5 +1,6 @@
 package io.github.seujorgenochurras.apiescolatrabalho.domain;
 
+import io.github.seujorgenochurras.apiescolatrabalho.domain.image.Image;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,25 +15,27 @@ import java.util.List;
 @Table(name = "users")
 public class User implements UserDetails {
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private @NotNull Long userId;
+   @GeneratedValue(strategy = GenerationType.UUID)
+   private @NotNull String userId;
 
    private String username;
-   private String password;
+   @ManyToOne
    private Image studentPhoto;
 
+   @OneToOne
    private CEP studentCep;
 
    @Enumerated(EnumType.STRING)
-   private Role userRole;
+   private UserRole userRole;
 
    private OffsetDateTime birthDate;
 
-   public @NotNull Long getUserId() {
+
+   public String getUserId() {
       return userId;
    }
 
-   public User setUserId(@NotNull Long userId) {
+   public User setUserId(String userId) {
       this.userId = userId;
       return this;
    }
@@ -48,11 +51,6 @@ public class User implements UserDetails {
 
    public User setUsername(String username) {
       this.username = username;
-      return this;
-   }
-
-   public User setPassword(String password) {
-      this.password = password;
       return this;
    }
 
@@ -74,11 +72,11 @@ public class User implements UserDetails {
       return this;
    }
 
-   public Role getUserRole() {
+   public UserRole getUserRole() {
       return userRole;
    }
 
-   public User setUserRole(Role userRole) {
+   public User setUserRole(UserRole userRole) {
       this.userRole = userRole;
       return this;
    }
@@ -89,10 +87,9 @@ public class User implements UserDetails {
    }
 
    @Override
-   public String getPassword() {
-      return password;
+   public String getPassword(){
+      return "";
    }
-
    @Override
    public String getUsername() {
       return username;
@@ -100,7 +97,7 @@ public class User implements UserDetails {
 
    @Override
    public boolean isAccountNonExpired() {
-      return false;
+      return true;
    }
 
    @Override
