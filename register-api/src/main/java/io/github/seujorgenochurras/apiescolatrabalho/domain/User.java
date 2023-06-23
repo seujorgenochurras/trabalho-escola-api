@@ -1,6 +1,5 @@
 package io.github.seujorgenochurras.apiescolatrabalho.domain;
 
-import io.github.seujorgenochurras.apiescolatrabalho.domain.image.Image;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,23 +12,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements UserDetails {
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
    private @NotNull String userId;
 
    private String username;
-   @ManyToOne
-   private Image studentPhoto;
-
-   @OneToOne
-   private CEP studentCep;
 
    @Enumerated(EnumType.STRING)
    private UserRole userRole;
 
    private OffsetDateTime birthDate;
-
 
    public String getUserId() {
       return userId;
@@ -40,35 +34,12 @@ public class User implements UserDetails {
       return this;
    }
 
-   public Image getStudentPhoto() {
-      return studentPhoto;
-   }
-
-   public User setStudentPhoto(Image studentPhoto) {
-      this.studentPhoto = studentPhoto;
-      return this;
-   }
-
-   public User setUsername(String username) {
-      this.username = username;
-      return this;
-   }
-
    public OffsetDateTime getBirthDate() {
       return birthDate;
    }
 
    public User setBirthDate(OffsetDateTime birthDate) {
       this.birthDate = birthDate;
-      return this;
-   }
-
-   public CEP getStudentCep() {
-      return studentCep;
-   }
-
-   public User setStudentCep(CEP studentCep) {
-      this.studentCep = studentCep;
       return this;
    }
 
@@ -87,12 +58,18 @@ public class User implements UserDetails {
    }
 
    @Override
-   public String getPassword(){
+   public String getPassword() {
       return "";
    }
+
    @Override
    public String getUsername() {
       return username;
+   }
+
+   public User setUsername(String username) {
+      this.username = username;
+      return this;
    }
 
    @Override
