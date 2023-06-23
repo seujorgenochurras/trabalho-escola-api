@@ -19,7 +19,6 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-
    private static Key getSigningKey() {
       try {
          return KeyLoader.loadPrivateKey(Path.of("meupau.key"));

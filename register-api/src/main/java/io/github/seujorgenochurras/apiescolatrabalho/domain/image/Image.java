@@ -1,6 +1,7 @@
 package io.github.seujorgenochurras.apiescolatrabalho.domain.image;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,6 +20,19 @@ public class Image implements CompressibleImage, UncompressibleImage {
    private String imageId;
 
    private String name;
+
+   public Image() {
+   }
+
+   public Image(MultipartFile multipartFile){
+      this.name = multipartFile.getName();
+      try {
+         this.rawImageData = multipartFile.getBytes();
+      }catch (IOException e){
+         e.printStackTrace();
+      }
+
+   }
 
    public String getImageId() {
       return imageId;
