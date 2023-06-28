@@ -18,7 +18,7 @@ public class ProgrammerController {
 
    @PostMapping(name = "programmer")
    public void registerProgrammer(@Valid ProgrammerDto programmerDto){
-      programmerService.saveProgrammer(ProgrammerAssembler.assemble(programmerDto));
+      programmerService.save(ProgrammerAssembler.assemble(programmerDto));
    }
 
 }

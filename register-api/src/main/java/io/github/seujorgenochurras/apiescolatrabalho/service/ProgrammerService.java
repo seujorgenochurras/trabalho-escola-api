@@ -15,7 +15,7 @@ public class ProgrammerService {
    private ProgrammerRepository programmerRepository;
 
    @Transactional
-   public void saveProgrammer(@Valid Programmer programmer) {
+   public void save(@Valid Programmer programmer) {
       programmerRepository.save(programmer);
    }
 
