@@ -1,20 +1,26 @@
 package io.github.seujorgenochurras.apiescolatrabalho.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.google.gson.annotations.SerializedName;
+import jakarta.persistence.*;
 
 @Entity
 public class CEP {
 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
+   @SerializedName("cep")
    private String cepCode;
 
+   @SerializedName("city")
    private String cityName;
+
+   @SerializedName("street")
    private String roadName;
+
+   @SerializedName("state")
    private String stateName;
+
+   private String neighborhood;
 
    public String getCepCode() {
       return cepCode;
@@ -22,6 +28,15 @@ public class CEP {
 
    public CEP setCepCode(String cepCode) {
       this.cepCode = cepCode;
+      return this;
+   }
+
+   public String getNeighborhood() {
+      return neighborhood;
+   }
+
+   public CEP setNeighborhood(String neighborhood) {
+      this.neighborhood = neighborhood;
       return this;
    }
 

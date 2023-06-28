@@ -13,12 +13,15 @@ public class StudentAssembler {
    @Autowired
    private CepService cepService;
 
+
    public Student assemble(StudentDto studentDto){
       Student newStudent = new Student();
-      newStudent.setStudentCep(CepService.fetchCep(studentDto.studentCep))
+      newStudent.setStudentCep(cepService.fetchCep(studentDto.studentCep))
               .setUsername(studentDto.username)
               .setUserId(UUID.randomUUID().toString())
               .setUserRole(UserRole.STUDENT)
               .setBirthDate(studentDto.birthDate);
+    //TODO
+      return newStudent;
    }
 }
