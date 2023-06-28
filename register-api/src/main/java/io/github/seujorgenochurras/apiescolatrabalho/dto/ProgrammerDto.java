@@ -5,6 +5,7 @@ import io.github.seujorgenochurras.apiescolatrabalho.domain.ProgrammingLanguage;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,11 @@ public class ProgrammerDto {
    @NotNull
    @Range(min = 18, max = 70)
    private int age;
+
+   private String name;
+
+   @NotNull
+   private OffsetDateTime birthDay;
    @NotNull
 
    private String preferredVarsNomination;
@@ -32,6 +38,15 @@ public class ProgrammerDto {
 
    public ProgrammerDto setDominatedProgrammingLanguages(List<ProgrammingLanguage> dominatedProgrammingLanguages) {
       this.dominatedProgrammingLanguages = dominatedProgrammingLanguages;
+      return this;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public ProgrammerDto setName(String name) {
+      this.name = name;
       return this;
    }
 
@@ -50,6 +65,15 @@ public class ProgrammerDto {
 
    public ProgrammerDto setYearsOfCode(int yearsOfCode) {
       this.yearsOfCode = yearsOfCode;
+      return this;
+   }
+
+   public OffsetDateTime getBirthDay() {
+      return birthDay;
+   }
+
+   public ProgrammerDto setBirthDay(OffsetDateTime birthDay) {
+      this.birthDay = birthDay;
       return this;
    }
 
