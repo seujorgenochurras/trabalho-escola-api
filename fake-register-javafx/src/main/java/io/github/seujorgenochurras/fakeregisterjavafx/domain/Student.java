@@ -1,7 +1,5 @@
 package io.github.seujorgenochurras.fakeregisterjavafx.domain;
 
-import java.time.OffsetDateTime;
-
 public class Student {
     private String name;
     private String cep;
@@ -33,4 +31,5 @@ public class Student {
         this.birthDate = birthDate;
         return this;
     }
+
 }

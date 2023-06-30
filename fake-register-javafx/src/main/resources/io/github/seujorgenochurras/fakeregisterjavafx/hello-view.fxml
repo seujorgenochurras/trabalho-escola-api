@@ -17,9 +17,10 @@
          <TextField fx:id="nameField" layoutX="14.0" layoutY="52.0" />
          <DatePicker fx:id="birthField" layoutX="14.0" layoutY="217.0" />
          <Text layoutX="35.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-         <TextField fx:id="cepField" layoutX="14.0" layoutY="150.0" />
-         <Text layoutX="35.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CEP"
- />
+         <Text fx:id="responseText" layoutX="125.0" layoutY="27" strokeType="OUTSIDE" strokeWidth="0.0" text=""></Text>
+          <TextField fx:id="cepField" layoutX="14.0" layoutY="150.0" />
+
+         <Text layoutX="35.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CEP"/>
          <Text layoutX="23.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birth" />
          <Button fx:id="registerButton" layoutX="283.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#onRegister" text="Register" />
       </children>

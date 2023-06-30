@@ -4,22 +4,27 @@ import com.google.gson.annotations.SerializedName;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "cep")
 public class CEP {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
    @SerializedName("cep")
+   @Column(name = "id", nullable = false, length = 10)
    private String cepCode;
 
    @SerializedName("city")
+   @Column(name = "city", nullable = false, length = 100)
    private String cityName;
 
    @SerializedName("street")
+   @Column(name = "street_name", nullable = false, length = 100)
    private String roadName;
 
    @SerializedName("state")
+   @Column(name = "state", nullable = false, length = 100)
    private String stateName;
 
+   @Column(name = "neighborhood", nullable = false, length = 100)
    private String neighborhood;
 
    public String getCepCode() {

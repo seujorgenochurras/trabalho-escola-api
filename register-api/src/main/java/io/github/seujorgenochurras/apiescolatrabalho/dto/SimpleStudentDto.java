@@ -1,9 +1,9 @@
 package io.github.seujorgenochurras.apiescolatrabalho.dto;
 
 public class SimpleStudentDto {
-    public String name;
-    public String birthDate;
-    public String cep;
+    String name;
+    String birthDate;
+    String cep;
 
     public String getName() {
         return name;

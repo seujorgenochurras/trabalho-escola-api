@@ -5,29 +5,49 @@ import io.github.seujorgenochurras.fakeregisterjavafx.domain.Student;
 
 import java.io.IOException;
 import java.net.*;
-import java.nio.charset.StandardCharsets;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class StudentService {
-    public static boolean postStudent(Student student)  {
+    public static PostedStudent postStudent(Student student) {
+        Gson gson = new Gson();
         try {
-            URL url = new URL("https://localhost:8080/register/student");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            Gson gson = new Gson();
-            connection.getOutputStream()
-                    .write(gson.toJson(student).getBytes(StandardCharsets.UTF_8));
-            connection.getOutputStream().flush();
-            connection.getOutputStream().close();
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://127.0.0.1:8080/register/student"))
+                    .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(student)))
+                    .version(HttpClient.Version.HTTP_2)
+                    .setHeader("Content-Type", "application/json")
+                    .build();
 
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
-            connection.disconnect();
-            return responseCode == 200;
-        } catch (IOException e) {
+            return new PostedStudent(response.statusCode(), response.body());
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+            return null;
         }
-        return false;
+    }
+    public static class PostedStudent{
+        private int statusCode;
+        private String body;
+
+        public PostedStudent(int statusCode, String body) {
+            this.statusCode = statusCode;
+            this.body = body;
+        }
+
+        public boolean isSuccessful(){
+            return this.statusCode >= 200 && this.statusCode <300;
+        }
+
+        public int getStatusCode() {
+            return statusCode;
+        }
+
+        public String getBody() {
+            return body;
+        }
     }
 }

@@ -13,7 +13,7 @@ public class SimpleStudentService {
     private SimpleStudentRepository simpleStudentRepository;
 
     @Transient
-    public void save(SimpleStudent student) {
-        simpleStudentRepository.save(student);
+    public SimpleStudent save(SimpleStudent student) {
+        return simpleStudentRepository.save(student);
     }
 }
